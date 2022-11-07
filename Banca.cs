@@ -99,30 +99,32 @@ public class Banca
         return cliente;
     }
 
-    public Prestito RicercaPrestito (string codiceFiscale)
+    public List<Prestito> RicercaPrestito (string codiceFiscale)
     {
+        List<Prestito> trovati = new List<Prestito>();
 
         foreach (Prestito prestito in Prestiti)
         {
             if (prestito.Intestatario.CodiceFiscale == codiceFiscale)
             {
-                return prestito;
+                trovati.Add(prestito);
             }
         }
 
-        return null;
+        return trovati;
     }
 
     public bool AggiungerePrestito(int id, int ammontare, int rata, string codiceFiscale)
     {
-        if(ammontare == 0 || rata == 0)
+        Cliente cliente = RicercaCliente(codiceFiscale);
+
+        if (ammontare == 0 || rata == 0 || codiceFiscale == "" || codiceFiscale == null || cliente == null || cliente.CodiceFiscale != codiceFiscale)
         {
             return false;
         }
 
         DateOnly dataInizio = DateOnly.FromDateTime(DateTime.Now);
         DateOnly dataFine = dataInizio.AddMonths(12);
-        Cliente cliente = RicercaCliente(codiceFiscale);
 
         Prestito prestito = new Prestito(id, ammontare, rata, dataInizio, dataFine, cliente);
         Prestiti.Add(prestito);

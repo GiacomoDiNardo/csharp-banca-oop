@@ -9,6 +9,7 @@ Banca intesa = new Banca("Intesa San Paolo");
 Console.WriteLine("Sistema amministrazione banca " + intesa.Nome);
 
 intesa.AggiungiCliente("Giacomo", "Di Nardo", "asdasfgsdfg2313", 1234);
+//intesa.AggiungiCliente("Marco", "Bianchi", "dgfndsvujsdfn567", 3256);
 
 Cliente ricercato = intesa.RicercaCliente("asdasfgsdfg2313");
 
@@ -35,17 +36,20 @@ intesa.AggiungerePrestito(1, 54000, 540, "asdasfgsdfg2313");
 intesa.AggiungerePrestito(2, 60000, 500, "asdasfgsdfg2313");
 intesa.AggiungerePrestito(2, 60000, 500, "asdasfgsdfg2313");
 intesa.AggiungerePrestito(2, 60000, 500, "asdasfgsdfg2313");
-intesa.AggiungerePrestito(2, 60000, 500, "asdasfgsdfg2313");
+intesa.AggiungerePrestito(2, 60000, 500, "dgfndsvujsdfn567");
 
-Prestito prestitoRicercato = intesa.RicercaPrestito("asdasfgsdfg2313");
-
-
-Console.WriteLine(prestitoRicercato.Ammontare);
-Console.WriteLine(prestitoRicercato.Rata);
-Console.WriteLine(prestitoRicercato.Intestatario.Nome);
-Console.WriteLine(prestitoRicercato.Intestatario.Cognome);
-
+Console.WriteLine("I prestiti del cliente {0}:", ricercato.Nome);
 Console.WriteLine();
+
+foreach (Prestito prestito in intesa.RicercaPrestito("asdasfgsdfg2313"))
+{
+    Console.WriteLine(prestito.Ammontare);
+    Console.WriteLine(prestito.Rata);
+    Console.WriteLine(prestito.Intestatario.Nome);
+    Console.WriteLine(prestito.Intestatario.Cognome);
+    Console.WriteLine();
+
+}
 
 Console.WriteLine(intesa.TotPrestiti("asdasfgsdfg2313"));
 
