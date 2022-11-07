@@ -12,16 +12,16 @@
 
 public class Prestito
 {
-    public int Id { get; set; }
+    public static int Id { get; set; }
     public int Ammontare { get; set; }
     public int Rata { get; set; }
     public DateOnly DataInizio { get; set; }
     public DateOnly DataFine { get; set; }
     public Cliente Intestatario { get; set; }
 
-    public Prestito(int id, int ammontare, int rata, DateOnly dataInizio, DateOnly dataFine, Cliente intestatario)
+    public Prestito(int ammontare, int rata, DateOnly dataInizio, DateOnly dataFine, Cliente intestatario)
     {
-        Id = id;
+        Id += 1;
         Ammontare = ammontare;
         Rata = rata;
         DataInizio = dataInizio;

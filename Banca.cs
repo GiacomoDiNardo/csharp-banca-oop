@@ -114,7 +114,7 @@ public class Banca
         return trovati;
     }
 
-    public bool AggiungerePrestito(int id, int ammontare, int rata, string codiceFiscale)
+    public bool AggiungerePrestito(int ammontare, int rata, string codiceFiscale)
     {
         Cliente cliente = RicercaCliente(codiceFiscale);
 
@@ -126,7 +126,7 @@ public class Banca
         DateOnly dataInizio = DateOnly.FromDateTime(DateTime.Now);
         DateOnly dataFine = dataInizio.AddMonths(12);
 
-        Prestito prestito = new Prestito(id, ammontare, rata, dataInizio, dataFine, cliente);
+        Prestito prestito = new Prestito(ammontare, rata, dataInizio, dataFine, cliente);
         Prestiti.Add(prestito);
 
         return true;

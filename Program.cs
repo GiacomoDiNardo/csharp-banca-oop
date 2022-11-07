@@ -32,11 +32,11 @@ Console.WriteLine();
 
 Console.WriteLine();
 
-intesa.AggiungerePrestito(1, 54000, 540, "asdasfgsdfg2313");
-intesa.AggiungerePrestito(2, 60000, 500, "asdasfgsdfg2313");
-intesa.AggiungerePrestito(2, 60000, 500, "asdasfgsdfg2313");
-intesa.AggiungerePrestito(2, 60000, 500, "asdasfgsdfg2313");
-intesa.AggiungerePrestito(2, 60000, 500, "dgfndsvujsdfn567");
+intesa.AggiungerePrestito(54000, 540, "asdasfgsdfg2313");
+intesa.AggiungerePrestito(60000, 500, "asdasfgsdfg2313");
+intesa.AggiungerePrestito(60000, 500, "asdasfgsdfg2313");
+intesa.AggiungerePrestito(60000, 500, "asdasfgsdfg2313");
+intesa.AggiungerePrestito(60000, 500, "dgfndsvujsdfn567");
 
 Console.WriteLine("I prestiti del cliente {0}:", ricercato.Nome);
 Console.WriteLine();
