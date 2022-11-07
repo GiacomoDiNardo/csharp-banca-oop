@@ -62,7 +62,7 @@ public class Banca
         return null;
     }
 
-    public void ModificaCliente(Cliente cliente)
+    public Cliente ModificaCliente(Cliente cliente)
     {
 
         Console.WriteLine("Inserisci nuovo nome:");
@@ -79,20 +79,24 @@ public class Banca
             cliente.Cognome = nuovoCognome;
         }
 
-        Console.WriteLine("Inserisci nuovo nome:");
+        Console.WriteLine("Inserisci nuovo codice fiscale:");
         string nuovoCodiceFiscale = Console.ReadLine();
         if (nuovoCodiceFiscale != null && nuovoCodiceFiscale != "" && nuovoCodiceFiscale != cliente.CodiceFiscale)
         {
             cliente.CodiceFiscale = nuovoCodiceFiscale;
         }
 
-        Console.WriteLine("Inserisci nuovo nome:");
+        Console.WriteLine("Inserisci nuovo stipendio:");
         int nuovoStipendio = Convert.ToInt32(Console.ReadLine());
-        if (nuovoStipendio != null && nuovoStipendio != 0 && nuovoStipendio != cliente.Stipendio)
+        if (nuovoStipendio != 0 && nuovoStipendio != cliente.Stipendio)
         {
             cliente.Stipendio = nuovoStipendio;
+        }else
+        {
+            Console.WriteLine("error: stipendio non valido");
         }
 
+        return cliente;
     }
 
     public Prestito RicercaPrestito (string codiceFiscale)
@@ -109,20 +113,49 @@ public class Banca
         return null;
     }
 
-    public bool AggiungerePrestito(int id, int ammontare, int rata, string codiceFiscale, DateOnly inizio, DateOnly fine, Cliente cliente )
+    public bool AggiungerePrestito(int id, int ammontare, int rata, string codiceFiscale)
     {
-        if(ammontare != 0 || rata != 0)
+        if(ammontare == 0 || rata == 0)
         {
             return false;
         }
 
-
         DateOnly dataInizio = DateOnly.FromDateTime(DateTime.Now);
         DateOnly dataFine = dataInizio.AddMonths(12);
+        Cliente cliente = RicercaCliente(codiceFiscale);
 
         Prestito prestito = new Prestito(id, ammontare, rata, dataInizio, dataFine, cliente);
+        Prestiti.Add(prestito);
 
         return true;
 
+    }
+
+    public int TotPrestiti(string codiceFiscale)
+    {
+        Cliente cliente = RicercaCliente(codiceFiscale);
+        int conto = 0;
+        foreach (Prestito prestito in Prestiti)
+        {
+            if (prestito.Intestatario.CodiceFiscale == codiceFiscale)
+            {
+                conto++;
+            }
+        }
+        return conto;
+    }
+
+    public int RateDaPagare(string codiceFiscale)
+    {
+        Cliente cliente = RicercaCliente(codiceFiscale);
+        int conto = 0;
+
+        foreach (Prestito prestito in Prestiti)
+        {
+            int daPagare = prestito.Ammontare / prestito.Rata;
+            conto += daPagare;
+        }
+
+        return conto;
     }
 }
